@@ -7,3 +7,8 @@
     npm run start
     // build
     npm run build
+    // server (IE8查看效果)
+    npm run server
+
+
+在开发环境中，IE8报错不显示内容，在`build`之后启动`server`再进行查看就没问题了。
