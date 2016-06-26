@@ -8,18 +8,28 @@ import * as Actions from '../actions/action';
 import { AjaxGet, AjaxPost } from '../utils/util';
 
 function isIE(ver){
-    var b = document.createElement('b');
+    let b = document.createElement('b');
     b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->';
     return b.getElementsByTagName('i').length === 1;
 }
 
 let App = React.createClass ({
+	getInitialState() {
+		return { ie8: isIE(8), ie9: isIE(9) };
+	},
+
 	componentDidMount() {
-		// 测试IE8请求结果
+		const _this = this;
 		AjaxGet('/test', function(data) {
-			alert( JSON.stringify(data) );
-			AjaxPost('/test', {a: 'a', b:[1,2], c: 3}, function(data) {
+			// 测试IE8请求结果
+			if( _this.state.ie8 ) {
 				alert( JSON.stringify(data) );
+			} else {
+				console.log( data );
+			}
+			AjaxPost('/test', {a: 'a', b:[1,2], c: 3}, function(data) {
+				if( _this.state.ie8 ) return alert( JSON.stringify(data) );
+				console.log( data );
 			});
 		});
 	},
@@ -29,7 +39,7 @@ let App = React.createClass ({
   		const data = { test1: test1, test2: test2 };
 		const actions = bindActionCreators(Actions, dispatch);
 
-		const isLowIe = isIE(8) || isIE(9) ? true : false;
+		const isLowIe = this.state.ie8 || this.state.ie9 ? true : false;
 		const name = isLowIe ? '' : 'example';
 		const time = isLowIe ? 0 : 800;
 		

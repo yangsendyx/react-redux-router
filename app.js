@@ -1,8 +1,8 @@
 'use strict';
 
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
 
 app.disable('x-powered-by');
 app.use( express.static('./dist/') );
@@ -21,13 +21,13 @@ function testFn(req, res, next) {
 }
 
 
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
 	console.error(err.stack);
 	res.status(500).json({ code: 500, msg: '500 - Server Error.' });
-}).use(function(req, res) {
+}).use((req, res) => {
 	res.status(404).json({ code: 404, msg: '404 - Not Found.' });
 });
 
-var listener = app.listen('8000', function() {
+const listener = app.listen('8000', () => {
 	console.log( 'Express server started. Content: '+app.get('env')+'. Port: '+listener.address().port );
 });
