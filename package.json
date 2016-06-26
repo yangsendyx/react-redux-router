@@ -45,8 +45,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
-    "build": "webpack --config webpack.production.config.js && node --harmony copy.js",
-    "server": "node --harmony app.js"
+    "build": "webpack --config webpack.prod.config.js && node --harmony copy.js",
+    "server": "node --harmony server.js"
   },
   "author": "",
   "license": "MIT"
