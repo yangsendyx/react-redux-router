@@ -1,0 +1,47 @@
+html {
+	width: 100%;
+	overflow-x: hidden;
+	min-height: 100%;
+}
+body {
+	margin: 0;
+	min-height: 100%;
+}
+
+.test_section {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	min-height: 100%;
+}
+
+// 过场动画 start
+@keyframes leave {
+	0% { transform: translate(0, 0);}
+	30% { transform: translate(0, 0);}
+	70% { transform: translate(100%, 0);}
+	100% { transform: translate(100%, 0);}
+}
+@keyframes enter {
+	0% { transform: translate(-100%, 0);}
+	30% { transform: translate(-100%, 0);}
+	70% { transform: translate(0, 0);}
+	100% { transform: translate(0, 0);}
+}
+.example-enter {
+	transform: translate(0, 0);
+}
+.example-enter.example-enter-active {
+	animation: enter .8s both;
+}
+.example-leave {
+	transform: translate(0, 0);
+}
+.example-leave.example-leave-active {
+	animation: leave .8s both;
+}
+.link-active {
+	color: #bbbbbb;
+	text-decoration: none;
+}
+// 过场动画 end
